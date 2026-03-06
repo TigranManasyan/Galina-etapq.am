@@ -1,7 +1,9 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
+        <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>{{ __('home.welcome') }}</h2>
+        <a href="{{ url('hy') }}">Հայերեն</a>
+        <a href="{{ url('en') }}">English</a>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -12,22 +14,20 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Մեր մասին</a>
                 <div class="dropdown-menu fade-down m-0">
+                    <a href="{{ route('info')}}" class="dropdown-item">Ընդհանուր տեղեկատվություններ</a>
+                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                    <a href="404.html" class="dropdown-item">404 Page</a>
+                </div>
+            </div>
+            
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Ուսանողին</a>
+                <div class="dropdown-menu fade-down m-0">
                     <a href="team.html" class="dropdown-item">Ընդհանուր տեղեկատվություններ</a>
                     <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                     <a href="404.html" class="dropdown-item">404 Page</a>
                 </div>
             </div>
-            <a href="about.html" class="nav-item nav-link">About</a>
-            <a href="courses.html" class="nav-item nav-link">Courses</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu fade-down m-0">
-                    <a href="team.html" class="dropdown-item">Our Team</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="404.html" class="dropdown-item">404 Page</a>
-                </div>
-            </div>
-            <a href="contact.html" class="nav-item nav-link">Contact</a>
         </div>
         <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
     </div>
