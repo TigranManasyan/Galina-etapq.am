@@ -1,35 +1,65 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>{{ __('home.welcome') }}</h2>
-        <a href="{{ url('hy') }}">Հայերեն</a>
-        <a href="{{ url('en') }}">English</a>
+        <img style="width:55px" src="{{ asset('logo.png') }}" alt="">
+        @php
+            function localized_url($locale)
+                {
+                    $segments = request()->segments(); // current URL-ի segments
+                    if (count($segments) > 0) {
+                        $segments[0] = $locale; // առաջին segment-ը փոխում ենք նոր լեզվով
+                    } else {
+                        $segments = [$locale]; // եթե root է, ավելացնում ենք լեզուն
+                    }
+
+                    return url(implode('/', $segments));
+                }
+        @endphp
+        <a href="{{ localized_url('hy') }}">Հայ</a> <br>
+        <a href="{{ localized_url('en') }}">Eng</a>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="index.html" class="nav-item nav-link active">գլխավոր</a>
+            <a href="" class="nav-item nav-link active">{{ __('navbar.home') }}</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Մեր մասին</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('navbar.about') }}</a>
                 <div class="dropdown-menu fade-down m-0">
-                    <a href="{{ route('info')}}" class="dropdown-item">Ընդհանուր տեղեկատվություններ</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="404.html" class="dropdown-item">404 Page</a>
+                    <a href="{{ route('info')}}" class="dropdown-item">{{ __('navbar.information') }}</a>
+                    <a href="" class="dropdown-item">{{ __('navbar.history') }}</a>
+                    <a href="" class="dropdown-item">{{ __('navbar.documents') }}</a>
                 </div>
             </div>
-            
+
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Ուսանողին</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('navbar.for_students') }}</a>
                 <div class="dropdown-menu fade-down m-0">
-                    <a href="team.html" class="dropdown-item">Ընդհանուր տեղեկատվություններ</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="404.html" class="dropdown-item">404 Page</a>
+                    <a href="" class="dropdown-item">{{ __('navbar.partners') }}</a>
+                    <a href="" class="dropdown-item">{{ __('navbar.olympiads') }}</a>
                 </div>
             </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('navbar.for_applicants') }}</a>
+                <div class="dropdown-menu fade-down m-0">
+                    <a href="" class="dropdown-item">{{ __('navbar.professions') }}</a>
+                    <a href="" class="dropdown-item">{{ __('navbar.procedure') }}</a>
+                    <a href="" class="dropdown-item">{{ __('navbar.necessary_documents') }}</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('navbar.media') }}</a>
+                <div class="dropdown-menu fade-down m-0">
+                    <a href="" class="dropdown-item">{{ __('navbar.news') }}</a>
+                    <a href="" class="dropdown-item">{{ __('navbar.video') }}</a>
+                    <a href="" class="dropdown-item">{{ __('navbar.gallery') }}</a>
+                </div>
+            </div>
+            <a href="" class="nav-item nav-link">{{ __('navbar.contact') }}</a>
+
         </div>
-        <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+
     </div>
 </nav>
 <!-- Navbar End -->

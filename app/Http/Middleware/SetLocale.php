@@ -16,10 +16,13 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = $request->segment(1);
-        if (in_array($locale, ['hy', 'en'])) {
-            App::setLocale($locale);
+        $locale = $request->route('locale'); // վերցնում ենք {locale}-ն URL-ից
+        if (!in_array($locale, ['hy', 'en'])) {
+            $locale = config('app.locale'); // default fallback
         }
+
+        App::setLocale($locale);
+
         return $next($request);
     }
 }
