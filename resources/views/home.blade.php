@@ -84,17 +84,15 @@
         <div class="row g-5">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                 <h6 class="section-title bg-white text-start text-primary pe-3">{{ __('navbar.about') }}</h6>
-                <h1 class="mb-4">{{ __('home.section__header') }}</h1>
-                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>{{ __('home.section_1') }}</p>
-                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>{{ __('home.section_2') }}</p>
-                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>{{ __('home.section_3') }}</p>
-                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>{{ __('home.section_4') }}</p>
-                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>{{ __('home.section_5') }}</p>
-                <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>{{ __('home.section_6') }}</p>
+                <h1 class="mb-4">{{ __('home.leader') }}</h1>
+                <p class="mb-0">{{ __('home.section_7') }}</p>
+                <p class="mb-0">{{ __('home.section_8') }}</p>
+                <p class="mb-0">{{ __('home.section_9') }}</p>
+                <p class="mb-0">{{ __('home.section_10') }}</p>
             </div>
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
                 <div class="position-relative h-100">
-                    <img class="img-fluid position-absolute w-100 h-100" src="{{asset('asset/img/about.jpg')}}" alt="" style="object-fit: cover;">
+                    <img class="img-fluid position-absolute w-100 h-100" src="{{asset('asset/img/leader.jpg')}}" alt="" style="object-fit: cover;">
                 </div>
             </div>
         </div>

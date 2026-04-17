@@ -1,0 +1,27 @@
+<?php
+    return [
+        'general_title' => 'General Information',
+        'general' => 'General Information',
+        'section_1' => 'About 600 students study at the Yerevan State College of Light Industry, receiving education in the following specialties:',
+        'section_1_item_1' => 'Clothing Modeling and Design',
+        'section_1_item_1' => 'Clothing Production Technology',
+        'section_1_item_2' => 'Design',
+        'section_1_item_3' => 'Software for Computing and Automated Systems',
+        'section_1_item_4' => 'Accounting',
+        'section_1_item_5' => 'Insurance',
+        'section_1_item_6' => 'Service Organization',
+        'section_1_item_7' => 'Operations Management with Advanced Foreign Language Skills',
+        'section_2' => 'Approximately 80 instructors teach at the college, organized into the following departments:',
+        'section_2_item_1' => 'Professional Subjects',
+        'section_2_item_2' => 'Information Technology',
+        'section_2_item_3' => 'General Education',
+        'section_2_item_4' => 'Economics',
+        'section_3' => 'The college offers short-term retraining courses in the following specialties:',
+        'section_3_item_1' => 'Computer Skills: CorelDraw, Adobe Photoshop, Web Design (website development)',
+        'section_3_item_2' => 'Language Proficiency: Russian, English (Tour Guide)',
+        'section_3_item_3' => 'Fashion Designer',
+        'section_3_item_2' => 'Shoe Repair Technician',
+        'section_3_item_2' => 'Insurance Agent',
+        'section_3_item_2' => 'Accountant',
+
+    ];
