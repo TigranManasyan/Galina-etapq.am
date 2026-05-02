@@ -9,6 +9,10 @@ use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\PartnersController;
 require __DIR__.'/admin.php';
 
+use App\Http\Controllers\ContactController;
+//require __DIR__.'/admin.php';
+
+
 Route::get('/', function() {
 
     return redirect(app()->getLocale());
@@ -24,6 +28,8 @@ Route::group([
     Route::get('/documents', [DocumentsController::class, 'index'])->name('documents');
     Route::get('/partners', [PartnersController::class, 'index'])->name('partners');
     Route::get('/olympiads', [OlympiadsController::class, 'index'])->name('olympiads');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
 
 });
 
