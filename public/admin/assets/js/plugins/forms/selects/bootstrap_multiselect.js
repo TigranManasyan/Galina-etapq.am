@@ -393,7 +393,7 @@
 
             },
             enableHTML: true,
-            buttonClass: 'btn btn-default',
+            buttonClass: 'btn btn-light',
             inheritClass: false,
             buttonWidth: '100%',
             buttonContainer: '<div class="btn-group" />',
@@ -428,13 +428,13 @@
             disabledText: '',
             delimiterText: ', ',
             templates: {
-                button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> <b class="caret"></b></button>',
-                ul: '<ul class="multiselect-container dropdown-menu"></ul>',
-                filter: '<li class="multiselect-item multiselect-filter"><div class="input-group"><span class="input-group-addon"><i class="icon-search4 text-size-base"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
-                filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default multiselect-clear-filter" type="button"><i class="icon-cross2"></i></button></span>',
-                li: '<li class="multiselect-item dropdown-item"><a tabindex="0"><label></label></a></li>',
-                divider: '<li class="multiselect-item divider"></li>',
-                liGroup: '<li class="multiselect-item multiselect-group"><label></label></li>'
+                button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span></button>',
+                ul: '<div class="multiselect-container dropdown-menu"></div>',
+                filter: '<div class="multiselect-item multiselect-filter"><div class="input-group"><input class="form-control multiselect-search" type="text"><i class="icon-search4"></i></div></div>',
+                filterClearBtn: '<span class="input-group-append"><button class="btn btn-light btn-icon multiselect-clear-filter" type="button"><i class="icon-cross2"></i></button></span>',
+                li: '<div class="multiselect-item dropdown-item form-check" tabindex="0"><label class="form-check-label"></label></div>',
+                divider: '<div class="multiselect-item dropdown-divider"></div>',
+                liGroup: '<div class="multiselect-item multiselect-group"><label class="form-check-label"></label></div>'
             }
         },
 
@@ -833,7 +833,7 @@
                 }, this));
 
                 $(".multiselect-all", this.$ul).css('background', '#f3f3f3').css('border-bottom', '1px solid #eaeaea');
-                $(".multiselect-all > label.multiselect-group-label", this.$ul).css('padding', '3px 20px 3px 35px');
+                $(".multiselect-all > label.form-check-label", this.$ul).css('padding', '3px 20px 3px 35px');
                 $(".multiselect-group > input", this.$ul).css('margin', '4px 0px 5px -20px');
             }
         },
@@ -858,7 +858,7 @@
             var $li = $(this.options.templates.li);
             var $label = $('label', $li);
             // $label.addClass(inputType);
-            // $label.addClass('multiselect-group-label');
+            $label.addClass('form-check-label');
             $li.addClass(classes);
 
             if (this.options.enableHTML) {
@@ -926,7 +926,7 @@
         createOptgroup: function(group) {
             var label = $(group).attr("label");
             var value = $(group).attr("value");
-            var $li = $('<li class="multiselect-item multiselect-group"><label></label></li>');
+            var $li = $('<div class="multiselect-item multiselect-group form-check"><label></label></div>');
 
             var classes = this.options.optionClass(group);
             $li.addClass(classes);
@@ -944,7 +944,7 @@
             }
 
             if (this.options.enableClickableOptGroups && this.options.multiple) {
-                $('label', $li).addClass('multiselect-group-label').prepend('<input type="checkbox" value="' + value + '"/> <span class="form-check-control-indicator" />');
+                $('label', $li).addClass('form-check-label').prepend('<input type="checkbox" value="' + value + '"/> <span class="form-check-control-indicator" />');
                 $li.closest('.multiselect-item').addClass('dropdown-item');
             }
 
@@ -980,7 +980,7 @@
                 }
 
                 var $li = $(this.options.templates.li);
-                // $('label', $li).addClass(this.options.multiple ? "checkbox" : "radio");
+                $('label', $li).addClass("form-check-label");
 
                 if (this.options.enableHTML) {
                     $('label', $li).html(" " + this.options.selectAllText + "<span class='form-check-control-indicator' />");

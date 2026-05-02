@@ -1,83 +1,112 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Animated markers
-*
-*  Demo JS code for maps_google_markers.html page
-*
-*  Version: 1.0
-*  Latest update: Aug 1, 2015
-*
-* ---------------------------------------------------------------------------- */
-
-document.addEventListener('DOMContentLoaded', function() {
-
-    // If you're adding a number of markers, you may want to
-    // drop them on the map consecutively rather than all at once.
-    // This example shows how to use setTimeout() to space
-    // your markers' animation.
+ *
+ *  # Animated markers
+ *
+ *  Specific JS code additions for maps_google_markers.html page
+ *
+ * ---------------------------------------------------------------------------- */
 
 
-    // Add Berlin coordinates
-    var berlin = new google.maps.LatLng(52.520816, 13.410186);
+// Setup module
+// ------------------------------
 
-    // Add neighborhoods coordinates
-    var neighborhoods = [
-        new google.maps.LatLng(52.511467, 13.447179),
-        new google.maps.LatLng(52.549061, 13.422975),
-        new google.maps.LatLng(52.497622, 13.396110),
-        new google.maps.LatLng(52.517683, 13.394393)
-    ];
+var GoogleMapMarkerAnimation = function() {
 
 
-    // Variables
-    var markers = [];
-    var iterator = 0;
-    var map;
+    //
+    // Setup module components
+    //
+
+    // Line chart
+    var _googleMapMarkerAnimation = function() {
+        if (typeof google == 'undefined') {
+            console.warn('Warning - Google Maps library is not loaded.');
+            return;
+        }
+
+        // If you're adding a number of markers, you may want to
+        // drop them on the map consecutively rather than all at once.
+        // This example shows how to use setTimeout() to space
+        // your markers' animation.
 
 
-    // Initialize
-    function initialize() {
+        // Add Berlin coordinates
+        var berlin = new google.maps.LatLng(52.520816, 13.410186);
 
-        // Options
-        var mapOptions = {
-            zoom: 12,
-            center: berlin
-        };
+        // Add neighborhoods coordinates
+        var neighborhoods = [
+            new google.maps.LatLng(52.511467, 13.447179),
+            new google.maps.LatLng(52.549061, 13.422975),
+            new google.maps.LatLng(52.497622, 13.396110),
+            new google.maps.LatLng(52.517683, 13.394393)
+        ];
 
-        // Apply options
-        map = new google.maps.Map($('.map-marker-animation')[0], mapOptions);
-    }
+        // Other variables
+        var markers = [];
+        var iterator = 0;
+        var map;
+
+        // Initialize
+        function initialize() {
+
+            // Define map element
+            var map_marker_animation_element = document.getElementById('map_marker_animation');
+
+            // Options
+            var mapOptions = {
+                zoom: 12,
+                center: berlin
+            };
+
+            // Apply options
+            map = new google.maps.Map(map_marker_animation_element, mapOptions);
+        }
+
+        // Drop markers
+        function drop() {
+            for (var i = 0; i < neighborhoods.length; i++) {
+                setTimeout(function() {
+                    addMarker();
+                }, i * 200);
+            }
+        }
+
+        // Add markers
+        function addMarker() {
+            markers.push(new google.maps.Marker({
+                position: neighborhoods[iterator],
+                map: map,
+                draggable: false,
+                animation: google.maps.Animation.DROP
+            }));
+            iterator++;
+        }
+
+        // Drop markers on button click
+        $('.drop-markers').on('click', function() {
+            drop();
+        });
+
+        // Initialize map on window load
+        google.maps.event.addDomListener(window, 'load', initialize);
+    };
 
 
-    // Drop markers
-    function drop() {
-        for (var i = 0; i < neighborhoods.length; i++) {
-            setTimeout(function() {
-                addMarker();
-            }, i * 200);
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+            _googleMapMarkerAnimation();
         }
     }
+}();
 
 
-    // Add markers
-    function addMarker() {
-        markers.push(new google.maps.Marker({
-            position: neighborhoods[iterator],
-            map: map,
-            draggable: false,
-            animation: google.maps.Animation.DROP
-        }));
-        iterator++;
-    }
+// Initialize module
+// ------------------------------
 
-
-    // Drop markers on button click
-    $('.drop-markers').on('click', function() {
-        drop();
-    });
-
-
-    // Initialize map on window load
-    google.maps.event.addDomListener(window, 'load', initialize);
-
+document.addEventListener('DOMContentLoaded', function() {
+    GoogleMapMarkerAnimation.init();
 });

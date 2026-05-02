@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\OlympiadsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\PartnersController;
-//require __DIR__.'/admin.php';
+require __DIR__.'/admin.php';
 
 Route::get('/', function() {
 

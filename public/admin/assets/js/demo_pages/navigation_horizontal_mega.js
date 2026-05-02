@@ -1,68 +1,97 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Horizontal mega menu
-*
-*  Demo JS code for navigation_horizontal_mega.html page
-*
-* ---------------------------------------------------------------------------- */
+ *
+ *  # Mega menu component
+ *
+ *  Demo JS code for navigation_horizontal_mega.html page
+ *
+ * ---------------------------------------------------------------------------- */
+
+
+// Setup module
+// ------------------------------
+
+var HorizontalMegaMenu = function () {
+
+
+    //
+    // Setup module components
+    //
+
+    // Uniform
+    var _componentUniform = function() {
+        if (!$().uniform) {
+            console.warn('Warning - uniform.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        $('.form-input-styled').uniform();
+    };
+
+    // Switchery
+    var _componentSwitchery = function() {
+        if (typeof Switchery == 'undefined') {
+            console.warn('Warning - switchery.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize multiple switches
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.form-input-switchery'));
+        elems.forEach(function(html) {
+            var switchery = new Switchery(html);
+        });
+    };
+
+    // Select2
+    var _componentSelect2 = function() {
+        if (!$().select2) {
+            console.warn('Warning - select2.min.js is not loaded.');
+            return;
+        }
+
+        // Default initialization
+        $('.form-control-select2').select2({
+            minimumResultsForSearch: Infinity
+        });
+    };
+
+    // Slinky
+    var _componentSlinky = function() {
+        if (!$().slinky) {
+            console.warn('Warning - slinky.min.js is not loaded.');
+            return;
+        };
+
+        // Attach drill down menu to menu list with child levels
+        $('.nav-item-multi').one('shown.bs.dropdown', function () {
+            $('.dropdown-item-group').each(function() {
+                $(this).slinky({
+                    title: true,
+                    speed: 200
+                });
+            });
+        });
+    };
+
+
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        initComponents: function() {
+            _componentUniform();
+            _componentSwitchery();
+            _componentSelect2();
+            _componentSlinky();
+        }
+    }
+}();
+
+
+// Initialize module
+// ------------------------------
 
 document.addEventListener('DOMContentLoaded', function() {
-
-
-    // Drill down menu
-    // ------------------------------
-
-    // If menu has child levels, add selector class
-    $('.menu-list').find('li').has('ul').parents('.menu-list').addClass('has-children');
-
-
-    // Attach drill down menu to menu list with child levels
-    $('.has-children').dcDrilldown({
-        defaultText: 'Back to parent',
-        saveState: true
-    });
-
-
-    // Destroy nicescroll on mobile and use native scroll instead
-    $(window).on('resize', function() {
-        setTimeout(function() {
-            if($(window).width() <= 768) {
-                $('.menu-list').getNiceScroll().remove();
-                $(".menu-list").removeAttr('style').removeAttr('tabindex');
-            }
-            else {
-                $(".menu-list").niceScroll({
-                    mousescrollstep: 100,
-                    cursorcolor: '#ccc',
-                    cursorborder: '',
-                    cursorwidth: 3,
-                    hidecursordelay: 200,
-                    autohidemode: 'scroll',
-                    railpadding: { right: 0.5 }
-                });
-            }
-        }, 200);
-    }).resize();
-
-
-
-    // Components
-    // ------------------------------
-
-    // Styled checkboxes and radios
-    $(".styled").uniform();
-
-
-	// Select2 select
-	$('.select').select2({
-	    minimumResultsForSearch: Infinity
-	});
-
-
-	// Switchery toggles
-	var elems = Array.prototype.slice.call(document.querySelectorAll('.switchery'));
-	elems.forEach(function(html) {
-		var switchery = new Switchery(html);
-	});
-	
+    HorizontalMegaMenu.initComponents();
 });

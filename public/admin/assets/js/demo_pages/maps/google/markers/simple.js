@@ -1,52 +1,86 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Basic markers
-*
-*  Demo JS code for maps_google_markers.html page
-*
-*  Version: 1.0
-*  Latest update: Aug 1, 2015
-*
-* ---------------------------------------------------------------------------- */
+ *
+ *  # Basic markers
+ *
+ *  Specific JS code additions for maps_google_markers.html page
+ *
+ * ---------------------------------------------------------------------------- */
 
-document.addEventListener('DOMContentLoaded', function() {
 
-	// Setup map
-	function initialize() {
+// Setup module
+// ------------------------------
 
-		// Set coordinates
-		var myLatlng = new google.maps.LatLng(52.374,4.898);
+var GoogleMapMarkerBasic = function() {
 
-		// Options
-		var mapOptions = {
-			zoom: 10,
-			center: myLatlng
+
+    //
+    // Setup module components
+    //
+
+    // Line chart
+    var _googleMapMarkerBasic = function() {
+        if (typeof google == 'undefined') {
+            console.warn('Warning - Google Maps library is not loaded.');
+            return;
+        }
+
+		// Setup map
+		function initialize() {
+
+            // Define map element
+            var map_marker_simple_element = document.getElementById('map_marker_simple');
+
+			// Set coordinates
+			var myLatlng = new google.maps.LatLng(52.374,4.898);
+
+			// Options
+			var mapOptions = {
+				zoom: 10,
+				center: myLatlng
+			};
+
+			// Apply options
+			var map = new google.maps.Map(map_marker_simple_element, mapOptions);
+			var contentString = 'Amsterdam';
+
+			// Add info window
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
+
+			// Add marker
+			var marker = new google.maps.Marker({
+				position: myLatlng,
+				map: map,
+				title: 'Hello World!'
+			});
+
+			// Attach click event
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.open(map,marker);
+			});
 		};
 
-		// Apply options
-		var map = new google.maps.Map($('.map-marker-simple')[0], mapOptions);
-		var contentString = 'Amsterdam';
+		// Initialize map on window load
+		google.maps.event.addDomListener(window, 'load', initialize);
+    };
 
-		// Add info window
-		var infowindow = new google.maps.InfoWindow({
-			content: contentString
-		});
 
-		// Add marker
-		var marker = new google.maps.Marker({
-			position: myLatlng,
-			map: map,
-			title: 'Hello World!'
-		});
+    //
+    // Return objects assigned to module
+    //
 
-		// Attach click event
-		google.maps.event.addListener(marker, 'click', function() {
-			infowindow.open(map,marker);
-		});
+    return {
+        init: function() {
+            _googleMapMarkerBasic();
+        }
+    }
+}();
 
-	};
 
-	// Initialize map on window load
-	google.maps.event.addDomListener(window, 'load', initialize);
+// Initialize module
+// ------------------------------
 
+document.addEventListener('DOMContentLoaded', function() {
+    GoogleMapMarkerBasic.init();
 });

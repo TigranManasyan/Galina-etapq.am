@@ -1,89 +1,97 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Hide navbar on scroll
-*
-*  Demo JS code for navbar_hideable.html page
-*
-* ---------------------------------------------------------------------------- */
+ *
+ *  # Hideable navbar
+ *
+ *  Demo JS code for navbar_hideable.html page
+ *
+ * ---------------------------------------------------------------------------- */
+
+
+// Setup module
+// ------------------------------
+
+var NavbarHideable = function() {
+
+
+    //
+    // Setup module components
+    //
+
+    // Headroom.js
+    var _componentHeadroom = function() {
+        if (typeof Headroom == 'undefined') {
+            console.warn('Warning - headroom.min.js is not loaded.');
+            return;
+        }
+
+        // Define elements
+        var navbarTop = document.querySelector('.navbar-slide-top'),
+            navbarBottom = document.querySelector('.navbar-slide-bottom');
+
+
+        //
+        // Top navbar
+        //
+
+        if (navbarTop) {
+
+            // Construct an instance of Headroom, passing the element
+            var headroomTop = new Headroom(navbarTop, {
+                offset: navbarTop.offsetHeight,
+                tolerance: {
+                    up: 10,
+                    down: 10
+                },
+                onUnpin : function() {
+                    $('.headroom').find('.show').removeClass('show');
+                }
+            });
+
+            // Initialise
+            headroomTop.init(); 
+        }
+
+
+
+        //
+        // Bottom navbar
+        //
+
+        if (navbarBottom) {
+            
+            // Construct an instance of Headroom, passing the element
+            var headroomBottom = new Headroom(navbarBottom, {
+                offset: navbarBottom.offsetHeight,
+                tolerance: {
+                    up: 10,
+                    down: 10
+                },
+                onUnpin : function() {
+                    $('.headroom').find('.show').removeClass('show');
+                }
+            });
+
+            // Initialise
+            headroomBottom.init();
+        }
+    };
+
+
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+            _componentHeadroom();
+        }
+    }
+}();
+
+
+// Initialize module
+// ------------------------------
 
 document.addEventListener('DOMContentLoaded', function() {
-
-
-    // Setup Headroom.js
-    // ------------------------------
-
-    // Initialize top by default
-    headroomTop();
-
-
-    // Top navbar
-    function headroomTop() {
-        $(".navbar-fixed-top").headroom({
-            classes: {
-                pinned: "headroom-top-pinned",
-                unpinned: "headroom-top-unpinned"
-            },
-            offset: $('.navbar').outerHeight(),
-            onUnpin : function() {
-                $('.navbar .dropdown-menu').parent().removeClass('open');
-            }
-        });
-    }
-
-
-    // Bottom navbar
-    function headroomBottom() {
-        $(".navbar-fixed-bottom").headroom({
-            classes : {
-                pinned : "headroom-bottom-pinned",
-                unpinned : "headroom-bottom-unpinned"
-            },
-            offset: $('.navbar').outerHeight(),
-            onPin : function() {
-                $('.navbar .dropdown-menu').parent().removeClass('open');
-            }
-        });
-    }
-
-
-
-    // Toggle navbar position
-    // ------------------------------
-
-    // Initialize switch
-    var togglePosition = document.querySelector('.toggle-position');
-    var togglePositionInit = new Switchery(togglePosition, {color: '#283133', secondaryColor: '#283133'});
-
-
-    // Toggle position on state change
-    togglePosition.onchange = function() {
-      if(togglePosition.checked) {
-
-        // Destroy top headroom
-        $(".navbar-fixed-top").headroom('destroy').removeData('headroom');
-
-        // Toggle classes
-        $('body').children('.navbar').first().removeClass('navbar-fixed-top').addClass('navbar-fixed-bottom');
-        $('body').removeClass('navbar-top');
-        $('.footer').hide();
-
-        // Initialize bottom navbar
-        headroomBottom();
-
-      }
-      else {
-
-        // Destroy bottom headroom
-        $(".navbar-fixed-bottom").headroom('destroy').removeData('headroom');
-
-        // Toggle classes
-        $('body').children('.navbar').first().removeClass('navbar-fixed-bottom').addClass('navbar-fixed-top');
-        $('body').addClass('navbar-top');
-        $('.footer').show();
-
-        // Initialize top navbar
-        headroomTop();
-      }
-    };
-    
+    NavbarHideable.init();
 });

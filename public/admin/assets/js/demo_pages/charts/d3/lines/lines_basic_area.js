@@ -4,198 +4,232 @@
  *
  *  Demo d3.js area chart setup with .tsv data source
  *
- *  Version: 1.0
- *  Latest update: August 1, 2015
- *
  * ---------------------------------------------------------------------------- */
 
-document.addEventListener('DOMContentLoaded', function() {
 
-    // Initialize chart
-    areaBasic('#d3-area-basic', 400);
+// Setup module
+// ------------------------------
 
-    // Chart setup
-    function areaBasic(element, height) {
+var D3AreaBasic = function() {
 
 
-        // Basic setup
-        // ------------------------------
+    //
+    // Setup module components
+    //
 
-        // Define main variables
-        var d3Container = d3.select(element),
-            margin = {top: 5, right: 10, bottom: 20, left: 40},
-            width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right,
-            height = height - margin.top - margin.bottom - 5;
+    // Chart
+    var _areaBasic = function() {
+        if (typeof d3 == 'undefined') {
+            console.warn('Warning - d3.min.js is not loaded.');
+            return;
+        }
 
-        // Format data
-        var parseDate = d3.time.format("%d-%b-%y").parse;
-
-
-
-        // Construct scales
-        // ------------------------------
-
-        // Horizontal
-        var x = d3.time.scale()
-            .range([0, width]);
-
-        // Vertical
-        var y = d3.scale.linear()
-            .range([height, 0]);
+        // Main variables
+        var element = document.getElementById('d3-area-basic'),
+            height = 400;
 
 
+        // Initialize chart only if element exsists in the DOM
+        if(element) {
 
-        // Create axes
-        // ------------------------------
+            // Basic setup
+            // ------------------------------
 
-        // Horizontal
-        var xAxis = d3.svg.axis()
-            .scale(x)
-            .orient("bottom")
-            .ticks(6)
-            .tickFormat(d3.time.format("%b"));
+            // Define main variables
+            var d3Container = d3.select(element),
+                margin = {top: 5, right: 10, bottom: 20, left: 40},
+                width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right,
+                height = height - margin.top - margin.bottom - 5;
 
-        // Vertical
-        var yAxis = d3.svg.axis()
-            .scale(y)
-            .orient("left");
+            // Format data
+            var parseDate = d3.time.format("%d-%b-%y").parse;
 
 
 
+            // Construct scales
+            // ------------------------------
 
-        // Create chart
-        // ------------------------------
+            // Horizontal
+            var x = d3.time.scale()
+                .range([0, width]);
 
-        // Add SVG element
-        var container = d3.select(element).append("svg");
-
-        // Add SVG group
-        var svg = container
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            // Vertical
+            var y = d3.scale.linear()
+                .range([height, 0]);
 
 
 
-        // Construct chart layout
-        // ------------------------------
+            // Create axes
+            // ------------------------------
 
-        // Area
-        var area = d3.svg.area()
-            .x(function(d) { return x(d.date); })
-            .y0(height)
-            .y1(function(d) { return y(d.close); });
+            // Horizontal
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient("bottom")
+                .ticks(6)
+                .tickFormat(d3.time.format("%b"));
+
+            // Vertical
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient("left");
 
 
 
-        // Load data
-        // ------------------------------
 
-        d3.tsv("../../../../global_assets/demo_data/d3/lines/lines_basic.tsv", function(error, data) {
+            // Create chart
+            // ------------------------------
 
-            // Pull out values
-            data.forEach(function(d) {
-                d.date = parseDate(d.date);
-                d.close = +d.close;
+            // Add SVG element
+            var container = d3.select(element).append("svg");
+
+            // Add SVG group
+            var svg = container
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+            // Construct chart layout
+            // ------------------------------
+
+            // Area
+            var area = d3.svg.area()
+                .x(function(d) { return x(d.date); })
+                .y0(height)
+                .y1(function(d) { return y(d.close); });
+
+
+
+            // Load data
+            // ------------------------------
+
+            d3.tsv("../../../../global_assets/demo_data/d3/lines/lines_basic.tsv", function(error, data) {
+
+                // Pull out values
+                data.forEach(function(d) {
+                    d.date = parseDate(d.date);
+                    d.close = +d.close;
+                });
+
+
+                // Set input domains
+                // ------------------------------
+
+                // Horizontal
+                x.domain(d3.extent(data, function(d) { return d.date; }));
+
+                // Vertical
+                y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+
+                //
+                // Append chart elements
+                //
+
+                // Add area
+                svg.append("path")
+                    .datum(data)
+                    .attr("class", "d3-area")
+                    .attr("fill", "#29B6F6")
+                    .attr("d", area);
+
+
+                // Append axes
+                // ------------------------------
+
+                // Horizontal
+                svg.append("g")
+                    .attr("class", "d3-axis d3-axis-horizontal d3-axis-strong")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(xAxis);
+
+                // Vertical
+                var verticalAxis = svg.append("g")
+                    .attr("class", "d3-axis d3-axis-vertical d3-axis-strong")
+                    .call(yAxis);
+
+                // Add text label
+                verticalAxis.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 10)
+                    .attr("dy", ".71em")
+                    .style("fill", "#999")
+                    .style("font-size", 12)
+                    .style("text-anchor", "end")
+                    .text("Price ($)");
+
             });
 
 
-            // Set input domains
+
+            // Resize chart
             // ------------------------------
 
-            // Horizontal
-            x.domain(d3.extent(data, function(d) { return d.date; }));
+            // Call function on window resize
+            $(window).on('resize', resize);
 
-            // Vertical
-            y.domain([0, d3.max(data, function(d) { return d.close; })]);
+            // Call function on sidebar width change
+            $('.sidebar-control').on('click', resize);
 
+            // Resize function
+            // 
+            // Since D3 doesn't support SVG resize by default,
+            // we need to manually specify parts of the graph that need to 
+            // be updated on window resize
+            function resize() {
 
-            //
-            // Append chart elements
-            //
-
-            // Add area
-            svg.append("path")
-                .datum(data)
-                .attr("class", "d3-area")
-                .attr("fill", "#29B6F6")
-                .attr("d", area);
+                // Layout variables
+                width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right;
 
 
-            // Append axes
-            // ------------------------------
+                // Layout
+                // -------------------------
 
-            // Horizontal
-            svg.append("g")
-                .attr("class", "d3-axis d3-axis-horizontal d3-axis-strong")
-                .attr("transform", "translate(0," + height + ")")
-                .call(xAxis);
+                // Main svg width
+                container.attr("width", width + margin.left + margin.right);
 
-            // Vertical
-            var verticalAxis = svg.append("g")
-                .attr("class", "d3-axis d3-axis-vertical d3-axis-strong")
-                .call(yAxis);
-
-            // Add text label
-            verticalAxis.append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 10)
-                .attr("dy", ".71em")
-                .style("fill", "#999")
-                .style("font-size", 12)
-                .style("text-anchor", "end")
-                .text("Price ($)");
-
-        });
+                // Width of appended group
+                svg.attr("width", width + margin.left + margin.right);
 
 
+                // Axes
+                // -------------------------
 
-        // Resize chart
-        // ------------------------------
+                // Horizontal range
+                x.range([0, width]);
 
-        // Call function on window resize
-        $(window).on('resize', resize);
-
-        // Call function on sidebar width change
-        $('.sidebar-control').on('click', resize);
-
-        // Resize function
-        // 
-        // Since D3 doesn't support SVG resize by default,
-        // we need to manually specify parts of the graph that need to 
-        // be updated on window resize
-        function resize() {
-
-            // Layout variables
-            width = d3Container.node().getBoundingClientRect().width - margin.left - margin.right;
+                // Horizontal axis
+                svg.selectAll('.d3-axis-horizontal').call(xAxis);
 
 
-            // Layout
-            // -------------------------
+                // Chart elements
+                // -------------------------
 
-            // Main svg width
-            container.attr("width", width + margin.left + margin.right);
-
-            // Width of appended group
-            svg.attr("width", width + margin.left + margin.right);
-
-
-            // Axes
-            // -------------------------
-
-            // Horizontal range
-            x.range([0, width]);
-
-            // Horizontal axis
-            svg.selectAll('.d3-axis-horizontal').call(xAxis);
-
-
-            // Chart elements
-            // -------------------------
-
-            // Area path
-            svg.selectAll('.d3-area').attr("d", area);
+                // Area path
+                svg.selectAll('.d3-area').attr("d", area);
+            }
         }
-}
+    };
+
+
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+            _areaBasic();
+        }
+    }
+}();
+
+
+// Initialize module
+// ------------------------------
+
+document.addEventListener('DOMContentLoaded', function() {
+    D3AreaBasic.init();
 });

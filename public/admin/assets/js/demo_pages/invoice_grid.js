@@ -1,18 +1,49 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Invoice grid
-*
-*  Demo JS code for invoice_grid.html page
-*
-* ---------------------------------------------------------------------------- */
+ *
+ *  # Invoice grid
+ *
+ *  Demo JS code for invoice_grid.html page
+ *
+ * ---------------------------------------------------------------------------- */
+
+
+// Setup module
+// ------------------------------
+
+var InvoiceGrid = function () {
+
+
+    //
+    // Setup module components
+    //
+
+    // Uniform
+    var _componentUniform = function() {
+        if (!$().uniform) {
+            console.warn('Warning - uniform.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        $('.form-input-styled').uniform();
+    };
+
+
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        initComponents: function() {
+            _componentUniform();
+        }
+    }
+}();
+
+
+// Initialize module
+// ------------------------------
 
 document.addEventListener('DOMContentLoaded', function() {
-
-    // Change vertical orientation of last 3 dropdowns in table
-    $('.content > .row').slice(-1).find('.dropdown, .btn-group').addClass('dropup');
-
-
-    // Styled checkboxes, radios
-    $('.styled').uniform();
-
+    InvoiceGrid.initComponents();
 });

@@ -1,43 +1,64 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Session timeout
-*
-*  Demo JS code for extra_session_timeout.html page
-*
-* ---------------------------------------------------------------------------- */
+ *
+ *  # Floating action buttons
+ *
+ *  Demo JS code for extra_fab.html page
+ *
+ * ---------------------------------------------------------------------------- */
+
+
+// Setup module
+// ------------------------------
+
+var FloatingActionButton = function() {
+
+
+    //
+    // Setup module components
+    //
+
+    // FAB
+    var _componentFab = function() {
+        if (!$().stick_in_parent) {
+            console.warn('Warning - sticky.min.js is not loaded.');
+            return;
+        }
+
+        // Add bottom spacing if reached bottom,
+        // to avoid footer overlapping
+        // -------------------------
+        
+        $(window).on('scroll', function() {
+            if($(window).scrollTop() + $(window).height() > $(document).height() - 40) {
+                $('.fab-menu-bottom-left, .fab-menu-bottom-right').addClass('reached-bottom');
+            }
+            else {
+                $('.fab-menu-bottom-left, .fab-menu-bottom-right').removeClass('reached-bottom');
+            }
+        });
+
+        // Initialize sticky button
+        $('#fab-menu-affixed-demo-left, #fab-menu-affixed-demo-right').stick_in_parent({
+            offset_top: 20
+        });
+    };
+
+
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+            _componentFab();
+        }
+    }
+}();
+
+
+// Initialize module
+// ------------------------------
 
 document.addEventListener('DOMContentLoaded', function() {
-
-
-    // Add bottom spacing if reached bottom,
-    // to avoid footer overlapping
-    // -------------------------
-    
-    $(window).scroll(function() {
-        if($(window).scrollTop() + $(window).height() > $(document).height() - 40) {
-            $('.fab-menu-bottom-left, .fab-menu-bottom-right').addClass('reached-bottom');
-        }
-        else {
-            $('.fab-menu-bottom-left, .fab-menu-bottom-right').removeClass('reached-bottom');
-        }
-    });
-
-
-    // Affix
-    // -------------------------
-
-    // Left alignment
-    $('#fab-menu-affixed-demo-left').affix({
-        offset: {
-            top: $('#fab-menu-affixed-demo-left').offset().top - 20
-        }
-    });
-
-    // Right alignment
-    $('#fab-menu-affixed-demo-right').affix({
-        offset: {
-            top: $('#fab-menu-affixed-demo-right').offset().top - 20
-        }
-    });
-
+    FloatingActionButton.init();
 });

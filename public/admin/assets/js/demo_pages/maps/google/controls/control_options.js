@@ -1,38 +1,73 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Control options
-*
-*  Demo JS code for maps_google_controls.html page
-*
-*  Version: 1.0
-*  Latest update: Aug 1, 2015
-*
-* ---------------------------------------------------------------------------- */
+ *
+ *  # Control options
+ *
+ *  Specific JS code additions for maps_google_controls.html page
+ *
+ * ---------------------------------------------------------------------------- */
 
-document.addEventListener('DOMContentLoaded', function() {
 
-    // Initialize
-    function initialize() {
+// Setup module
+// ------------------------------
 
-        // Options
-        var mapOptions = {
-            zoom: 6,
-            center: new google.maps.LatLng(51.164, 10.454),
-            mapTypeControl: true,
-            mapTypeControlOptions: {
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-            },
-            zoomControl: true,
-            zoomControlOptions: {
-                style: google.maps.ZoomControlStyle.SMALL
-            }
+var GoogleMapControlOptions = function() {
+
+
+    //
+    // Setup module components
+    //
+
+    // Line chart
+    var _googleMapControlOptions = function() {
+        if (typeof google == 'undefined') {
+            console.warn('Warning - Google Maps library is not loaded.');
+            return;
         }
 
-        // Apply options
-        var map = new google.maps.Map($('.map-control-options')[0], mapOptions);
+        // Initialize
+        function initialize() {
+
+            // Define map element
+            var map_control_options_element = document.getElementById('map_control_options');
+
+            // Options
+            var mapOptions = {
+                zoom: 6,
+                center: new google.maps.LatLng(51.164, 10.454),
+                mapTypeControl: true,
+                mapTypeControlOptions: {
+                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                },
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.SMALL
+                }
+            }
+
+            // Apply options
+            var map = new google.maps.Map(map_control_options_element, mapOptions);
+        }
+
+        // Load map
+        google.maps.event.addDomListener(window, 'load', initialize);
+    };
+
+
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+            _googleMapControlOptions();
+        }
     }
+}();
 
-    // Load map
-    google.maps.event.addDomListener(window, 'load', initialize);
 
+// Initialize module
+// ------------------------------
+
+document.addEventListener('DOMContentLoaded', function() {
+    GoogleMapControlOptions.init();
 });

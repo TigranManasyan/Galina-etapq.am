@@ -1,37 +1,72 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Traffic layer
-*
-*  Demo JS code for maps_google_layers.html page
-*
-*  Version: 1.0
-*  Latest update: Aug 1, 2015
-*
-* ---------------------------------------------------------------------------- */
+ *
+ *  # Traffic layer
+ *
+ *  Specific JS code additions for maps_google_layers.html page
+ *
+ * ---------------------------------------------------------------------------- */
 
-document.addEventListener('DOMContentLoaded', function() {
 
-	// Initialize
-	function initialize() {
+// Setup module
+// ------------------------------
 
-		// Set coordinates
-		var myLatlng = new google.maps.LatLng(40.4122142, -3.7059725);
+var GoogleMapLayerTraffic = function() {
 
-		// Options
-		var mapOptions = {
-			zoom: 12,
-			center: myLatlng
+
+    //
+    // Setup module components
+    //
+
+    // Line chart
+    var _googleMapLayerTraffic = function() {
+        if (typeof google == 'undefined') {
+            console.warn('Warning - Google Maps library is not loaded.');
+            return;
+        }
+
+		// Initialize
+		function initialize() {
+
+            // Define map element
+            var map_layer_traffic_element = document.getElementById('map_layer_traffic');
+
+			// Set coordinates
+			var myLatlng = new google.maps.LatLng(40.4122142, -3.7059725);
+
+			// Options
+			var mapOptions = {
+				zoom: 12,
+				center: myLatlng
+			}
+
+			// Apply options
+			var map = new google.maps.Map(map_layer_traffic_element, mapOptions);
+
+			// Add layers
+			var trafficLayer = new google.maps.TrafficLayer();
+				trafficLayer.setMap(map);
 		}
 
-		// Apply options
-		var map = new google.maps.Map($('.map-layer-traffic')[0], mapOptions);
+		// Load map
+		google.maps.event.addDomListener(window, 'load', initialize);
+    };
 
-		// Add layers
-		var trafficLayer = new google.maps.TrafficLayer();
-			trafficLayer.setMap(map);
-	}
 
-	// Load map
-	google.maps.event.addDomListener(window, 'load', initialize);
+    //
+    // Return objects assigned to module
+    //
 
+    return {
+        init: function() {
+            _googleMapLayerTraffic();
+        }
+    }
+}();
+
+
+// Initialize module
+// ------------------------------
+
+document.addEventListener('DOMContentLoaded', function() {
+    GoogleMapLayerTraffic.init();
 });

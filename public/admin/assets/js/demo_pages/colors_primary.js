@@ -1,121 +1,180 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Primary palette colors
-*
-*  Demo JS code for colors_primary.html page
-*
-* ---------------------------------------------------------------------------- */
-
-document.addEventListener('DOMContentLoaded', function() {
+ *
+ *  # Primary color palette showcase
+ *
+ *  Demo JS code for colors_primary.html page
+ *
+ * ---------------------------------------------------------------------------- */
 
 
-    // Selects
-    // ------------------------------
+// Setup module
+// ------------------------------
 
-    // Basic select2
-    $('.select').select2({
-        minimumResultsForSearch: Infinity,
-        containerCssClass: 'bg-primary'
-    });
+var PrimaryPalette = function() {
 
 
-    // Select2 ultiselect item color
-    $('.select-item-color').select2({
-        containerCssClass: 'bg-primary'
-    });
+    //
+    // Setup module components
+    //
 
+    // Select2
+    var _componentSelect2 = function() {
+        if (!$().select2) {
+            console.warn('Warning - select2.min.js is not loaded.');
+            return;
+        }
 
-    // Select2 dropdown menu color
-    $('.select-menu-color').select2({
-        containerCssClass: 'bg-primary',
-        dropdownCssClass: 'bg-primary'
-    });
-
+        // Initialize
+        $('.form-control-select2').select2();
+    };
 
     // Multiselect
-    $('.multiselect').multiselect({
-        buttonClass: 'btn bg-primary',
-        nonSelectedText: 'Select your state'
-    });
+    var _componentMultiselect = function() {
+        if (!$().multiselect) {
+            console.warn('Warning - bootstrap-multiselect.js is not loaded.');
+            return;
+        }
 
+        // Initialize
+        $('.form-control-multiselect').multiselect({
+            buttonClass: 'btn bg-primary',
+            nonSelectedText: 'Select your state'
+        });
 
-    // SelectBoxIt
-    $(".selectbox").selectBoxIt({
-        autoWidth: false,
-        theme: "bootstrap"
-    });
-
-
-    // Bootstrap select
-    $.fn.selectpicker.defaults = {
-        iconBase: '',
-        tickIcon: 'icon-checkmark-circle'
-    }
-    $('.bootstrap-select').selectpicker();
-
-
-
-    // Notifications
-    // ------------------------------
+        // Material theme example
+        $('.form-control-multiselect-material').multiselect({
+            buttonClass: 'btn btn-light text-primary'
+        });
+    };
 
     // jGrowl
-    $('.growl-launch').on('click', function () {
-        $.jGrowl('I am a well highlighted primary notice..', { theme: 'bg-primary-400', header: 'Well highlighted' });
-    });
+    var _componentJgrowl = function() {
+        if (!$().jGrowl) {
+            console.warn('Warning - jgrowl.min.js is not loaded.');
+            return;
+        }
 
+        // Initialize
+        $('.growl-launch').on('click', function () {
+            $.jGrowl('Check me out! I\'m a jGrowl notice.', {
+                header: 'Well highlighted',
+                theme: 'bg-primary-400'
+            });
+        });
+    };
 
     // PNotify
-    $('.pnotify-launch').on('click', function () {
-        new PNotify({
-            title: 'Info Notice',
-            text: 'Check me out! I\'m a notice.',
-            icon: 'icon-info22',
-            delay: 5000,
-            addclass: 'bg-primary-400'
+    var _componentPnotify = function() {
+        if (typeof PNotify == 'undefined') {
+            console.warn('Warning - pnotify.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        $('.pnotify-launch').on('click', function () {
+            new PNotify({
+                title: 'Notification',
+                text: 'Check me out! I\'m a PNotify notice.',
+                icon: 'icon-info22',
+                addclass: 'bg-primary-400 border-primary'
+            });
         });
-    });
+    };
+
+    // Noty
+    var _componentNoty = function() {
+        if (typeof Noty == 'undefined') {
+            console.warn('Warning - noty.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        $('.noty-launch').on('click', function() {
+            new Noty({
+                layout: 'topRight',
+                theme: ' alert bg-primary text-white p-0',
+                text: 'Check me out! I\'m a Noty notice.',
+                timeout: 2500
+            }).show();
+        });
+    };
+
+    // Switchery
+    var _componentSwitchery = function() {
+        if (typeof Switchery == 'undefined') {
+            console.warn('Warning - switchery.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        var switchery = document.querySelector('.form-input-switchery');
+        var init = new Switchery(switchery, {color: '#2196F3'});
+    };
+
+    // Uniform
+    var _componentUniform = function() {
+        if (!$().uniform) {
+            console.warn('Warning - uniform.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        $('.form-input-styled').uniform({
+            wrapperClass: 'border-primary text-primary-600',
+            selectClass: 'uniform-select bg-primary border-primary',
+            fileButtonClass: 'action btn bg-primary'
+        });
+
+        // Material theme example
+        $('.form-input-styled-material').uniform({
+            selectClass: 'uniform-select text-primary'
+        });
+    };
+
+    // Tooltips and popovers
+    var _componentPopups = function() {
+
+        // Tooltip
+        $('[data-popup=tooltip-custom]').tooltip({
+            template: '<div class="tooltip"><div class="arrow border-primary"></div><div class="tooltip-inner bg-primary"></div></div>'
+        });
 
 
-
-    // Form components
-    // ------------------------------
-
-    // Switchery toggle
-    var switchery = document.querySelector('.switch');
-    var init = new Switchery(switchery, {color: '#2196F3'});
+        // Popover title
+        $('[data-popup=popover-custom]').popover({
+            template: '<div class="popover border-primary"><div class="arrow"></div><h3 class="popover-header bg-primary"></h3><div class="popover-body"></div></div>'
+        });
 
 
-    // Checkboxes and radios
-    $(".styled").uniform({
-        wrapperClass: "border-primary text-primary-600"
-    });
+        // Popover background color
+        $('[data-popup=popover-solid]').popover({
+            template: '<div class="popover bg-primary border-primary"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body text-white"></div></div>'
+        });
+    };
 
 
-    // File input
-    $(".file-styled").uniform({
-        fileButtonClass: 'action btn bg-primary'
-    });
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+            _componentSelect2();
+            _componentMultiselect();
+            _componentJgrowl();
+            _componentPnotify();
+            _componentNoty();
+            _componentSwitchery();
+            _componentUniform();
+            _componentPopups();
+        }
+    }
+}();
 
 
+// Initialize module
+// ------------------------------
 
-    // Popups
-    // ------------------------------
-
-    // Tooltip
-    $('[data-popup=tooltip-custom]').tooltip({
-        template: '<div class="tooltip"><div class="bg-primary"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div></div>'
-    });
-
-
-    // Popover title
-    $('[data-popup=popover-custom]').popover({
-        template: '<div class="popover border-primary"><div class="arrow"></div><h3 class="popover-title bg-primary"></h3><div class="popover-content"></div></div>'
-    });
-
-
-    // Popover background color
-    $('[data-popup=popover-solid]').popover({
-        template: '<div class="popover bg-primary"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-    });
-
+document.addEventListener('DOMContentLoaded', function() {
+    PrimaryPalette.init();
 });

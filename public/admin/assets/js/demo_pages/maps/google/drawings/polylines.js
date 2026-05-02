@@ -1,74 +1,107 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Polylines
-*
-*  Demo JS code for maps_google_drawings.html page
-*
-*  Version: 1.0
-*  Latest update: Aug 1, 2015
-*
-* ---------------------------------------------------------------------------- */
-
-document.addEventListener('DOMContentLoaded', function() {
-
-    // This example creates an interactive map which constructs a
-    // polyline based on user clicks. Note that the polyline only appears
-    // once its path property contains two LatLng coordinates.
-
-    var poly;
-    var map;
-
-    // Initialize
-    function initialize() {
-
-        // Options
-        var mapOptions = {
-            zoom: 8,
-            center: new google.maps.LatLng(41.651, -0.894) // Center the map on Chicago, USA.
-        };
-
-        // Apply options
-        map = new google.maps.Map($('.map-drawing-polyline')[0], mapOptions);
+ *
+ *  # Polylines
+ *
+ *  Specific JS code additions for maps_google_drawings.html page
+ *
+ * ---------------------------------------------------------------------------- */
 
 
-        // Polyline options
-        var polyOptions = {
-            strokeColor: '#555',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-        };
+// Setup module
+// ------------------------------
 
-        // Apply options
-        poly = new google.maps.Polyline(polyOptions);
-        poly.setMap(map);
-
-        // Add a listener for the click event
-        google.maps.event.addListener(map, 'click', addLatLng);
-    }
+var GoogleMapDrawingPolylines = function() {
 
 
     //
-    // Handles click events on a map, and adds a new point to the Polyline.
-    // @param {google.maps.MouseEvent} event
+    // Setup module components
+    //
 
-    function addLatLng(event) {
+    // Line chart
+    var _googleMapDrawingPolylines = function() {
+        if (typeof google == 'undefined') {
+            console.warn('Warning - Google Maps library is not loaded.');
+            return;
+        }
 
-        var path = poly.getPath();
+        // This example creates an interactive map which constructs a
+        // polyline based on user clicks. Note that the polyline only appears
+        // once its path property contains two LatLng coordinates.
 
-        // Because path is an MVCArray, we can simply append a new coordinate
-        // and it will automatically appear.
-        path.push(event.latLng);
+        var poly;
+        var map;
 
-        // Add a new marker at the new plotted point on the polyline.
-        var marker = new google.maps.Marker({
-            position: event.latLng,
-            title: '#' + path.getLength(),
-            map: map
-        });
+        // Initialize
+        function initialize() {
+
+            // Define map element
+            var map_drawing_polylines_element = document.getElementById('map_drawing_polyline');
+
+            // Options
+            var mapOptions = {
+                zoom: 8,
+                center: new google.maps.LatLng(41.651, -0.894) // Center the map on Chicago, USA.
+            };
+
+            // Apply options
+            map = new google.maps.Map(map_drawing_polylines_element, mapOptions);
+
+
+            // Polyline options
+            var polyOptions = {
+                strokeColor: '#555',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            };
+
+            // Apply options
+            poly = new google.maps.Polyline(polyOptions);
+            poly.setMap(map);
+
+            // Add a listener for the click event
+            google.maps.event.addListener(map, 'click', addLatLng);
+        }
+
+        //
+        // Handles click events on a map, and adds a new point to the Polyline.
+        // @param {google.maps.MouseEvent} event
+
+        function addLatLng(event) {
+
+            var path = poly.getPath();
+
+            // Because path is an MVCArray, we can simply append a new coordinate
+            // and it will automatically appear.
+            path.push(event.latLng);
+
+            // Add a new marker at the new plotted point on the polyline.
+            var marker = new google.maps.Marker({
+                position: event.latLng,
+                title: '#' + path.getLength(),
+                map: map
+            });
+        }
+
+        // Load map
+        google.maps.event.addDomListener(window, 'load', initialize);
+    };
+
+
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+            _googleMapDrawingPolylines();
+        }
     }
+}();
 
 
-    // Load map
-    google.maps.event.addDomListener(window, 'load', initialize);
+// Initialize module
+// ------------------------------
 
+document.addEventListener('DOMContentLoaded', function() {
+    GoogleMapDrawingPolylines.init();
 });

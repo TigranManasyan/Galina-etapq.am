@@ -1,121 +1,180 @@
 /* ------------------------------------------------------------------------------
-*
-*  # Danger palette colors
-*
-*  Demo JS code for colors_danger.html page
-*
-* ---------------------------------------------------------------------------- */
-
-document.addEventListener('DOMContentLoaded', function() {
+ *
+ *  # Danger color palette showcase
+ *
+ *  Demo JS code for colors_danger.html page
+ *
+ * ---------------------------------------------------------------------------- */
 
 
-    // Selects
-    // ------------------------------
+// Setup module
+// ------------------------------
 
-    // Basic select2
-    $('.select').select2({
-        minimumResultsForSearch: Infinity,
-        containerCssClass: 'bg-danger-400'
-    });
+var DangerPalette = function() {
 
 
-    // Select2 ultiselect item color
-    $('.select-item-color').select2({
-        containerCssClass: 'bg-danger-400'
-    });
+    //
+    // Setup module components
+    //
 
+    // Select2
+    var _componentSelect2 = function() {
+        if (!$().select2) {
+            console.warn('Warning - select2.min.js is not loaded.');
+            return;
+        }
 
-    // Select2 dropdown menu color
-    $('.select-menu-color').select2({
-        containerCssClass: 'bg-danger-400',
-        dropdownCssClass: 'bg-danger-400'
-    });
-
+        // Initialize
+        $('.form-control-select2').select2();
+    };
 
     // Multiselect
-    $('.multiselect').multiselect({
-        buttonClass: 'btn bg-danger-400',
-        nonSelectedText: 'Select your state'
-    });
+    var _componentMultiselect = function() {
+        if (!$().multiselect) {
+            console.warn('Warning - bootstrap-multiselect.js is not loaded.');
+            return;
+        }
 
+        // Initialize
+        $('.form-control-multiselect').multiselect({
+            buttonClass: 'btn bg-danger',
+            nonSelectedText: 'Select your state'
+        });
 
-    // SelectBoxIt
-    $(".selectbox").selectBoxIt({
-        autoWidth: false,
-        theme: "bootstrap"
-    });
-
-
-    // Bootstrap select
-    $.fn.selectpicker.defaults = {
-        iconBase: '',
-        tickIcon: 'icon-checkmark-circle'
-    }
-    $('.bootstrap-select').selectpicker();
-
-
-
-    // Notifications
-    // ------------------------------
+        // Material theme example
+        $('.form-control-multiselect-material').multiselect({
+            buttonClass: 'btn btn-light text-danger'
+        });
+    };
 
     // jGrowl
-    $('.growl-launch').on('click', function () {
-        $.jGrowl('I am a well highlighted danger notice..', { theme: 'bg-danger-400', header: 'Well highlighted' });
-    });
+    var _componentJgrowl = function() {
+        if (!$().jGrowl) {
+            console.warn('Warning - jgrowl.min.js is not loaded.');
+            return;
+        }
 
+        // Initialize
+        $('.growl-launch').on('click', function () {
+            $.jGrowl('Check me out! I\'m a jGrowl notice.', {
+                header: 'Well highlighted',
+                theme: 'bg-danger-400'
+            });
+        });
+    };
 
     // PNotify
-    $('.pnotify-launch').on('click', function () {
-        new PNotify({
-            title: 'Info Notice',
-            text: 'Check me out! I\'m a notice.',
-            icon: 'icon-info22',
-            delay: 5000,
-            addclass: 'bg-danger'
+    var _componentPnotify = function() {
+        if (typeof PNotify == 'undefined') {
+            console.warn('Warning - pnotify.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        $('.pnotify-launch').on('click', function () {
+            new PNotify({
+                title: 'Notification',
+                text: 'Check me out! I\'m a PNotify notice.',
+                icon: 'icon-info22',
+                addclass: 'bg-danger-400 border-danger'
+            });
         });
-    });
+    };
+
+    // Noty
+    var _componentNoty = function() {
+        if (typeof Noty == 'undefined') {
+            console.warn('Warning - noty.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        $('.noty-launch').on('click', function() {
+            new Noty({
+                layout: 'topRight',
+                theme: ' alert bg-danger text-white p-0',
+                text: 'Check me out! I\'m a Noty notice.',
+                timeout: 2500
+            }).show();
+        });
+    };
+
+    // Switchery
+    var _componentSwitchery = function() {
+        if (typeof Switchery == 'undefined') {
+            console.warn('Warning - switchery.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        var switchery = document.querySelector('.form-input-switchery');
+        var init = new Switchery(switchery, {color: '#F44336'});
+    };
+
+    // Uniform
+    var _componentUniform = function() {
+        if (!$().uniform) {
+            console.warn('Warning - uniform.min.js is not loaded.');
+            return;
+        }
+
+        // Initialize
+        $('.form-input-styled').uniform({
+            wrapperClass: 'border-danger text-danger-600',
+            selectClass: 'uniform-select bg-danger border-danger',
+            fileButtonClass: 'action btn bg-danger'
+        });
+
+        // Material theme example
+        $('.form-input-styled-material').uniform({
+            selectClass: 'uniform-select text-danger'
+        });
+    };
+
+    // Tooltips and popovers
+    var _componentPopups = function() {
+
+        // Tooltip
+        $('[data-popup=tooltip-custom]').tooltip({
+            template: '<div class="tooltip"><div class="arrow border-danger"></div><div class="tooltip-inner bg-danger"></div></div>'
+        });
 
 
-
-    // Form components
-    // ------------------------------
-
-    // Switchery toggle
-    var switchery = document.querySelector('.switch');
-    var init = new Switchery(switchery, {color: '#EF5350'});
+        // Popover title
+        $('[data-popup=popover-custom]').popover({
+            template: '<div class="popover border-danger"><div class="arrow"></div><h3 class="popover-header bg-danger"></h3><div class="popover-body"></div></div>'
+        });
 
 
-    // Checkboxes and radios
-    $(".styled").uniform({
-        wrapperClass: "border-danger text-danger-600"
-    });
+        // Popover background color
+        $('[data-popup=popover-solid]').popover({
+            template: '<div class="popover bg-danger border-danger"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body text-white"></div></div>'
+        });
+    };
 
 
-    // File input
-    $(".file-styled").uniform({
-        fileButtonClass: 'action btn bg-danger'
-    });
+    //
+    // Return objects assigned to module
+    //
+
+    return {
+        init: function() {
+            _componentSelect2();
+            _componentMultiselect();
+            _componentJgrowl();
+            _componentPnotify();
+            _componentNoty();
+            _componentSwitchery();
+            _componentUniform();
+            _componentPopups();
+        }
+    }
+}();
 
 
+// Initialize module
+// ------------------------------
 
-    // Popups
-    // ------------------------------
-
-    // Tooltip
-    $('[data-popup=tooltip-custom]').tooltip({
-        template: '<div class="tooltip"><div class="bg-danger-400"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div></div>'
-    });
-
-
-    // Popover title
-    $('[data-popup=popover-custom]').popover({
-        template: '<div class="popover border-danger-400"><div class="arrow"></div><h3 class="popover-title bg-danger-400"></h3><div class="popover-content"></div></div>'
-    });
-
-
-    // Popover background color
-    $('[data-popup=popover-solid]').popover({
-        template: '<div class="popover bg-danger-400"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
-    });
-
+document.addEventListener('DOMContentLoaded', function() {
+    DangerPalette.init();
 });
