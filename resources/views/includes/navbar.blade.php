@@ -28,8 +28,8 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('navbar.about') }}</a>
                 <div class="dropdown-menu fade-down m-0">
                     <a href="{{ route('info')}}" class="dropdown-item">{{ __('navbar.information') }}</a>
-                    <a href="" class="dropdown-item">{{ __('navbar.history') }}</a>
-                    <a href="" class="dropdown-item">{{ __('navbar.documents') }}</a>
+                    <a href="{{ route('history') }}" class="dropdown-item">{{ __('navbar.history') }}</a>
+                    <a href="{{ route('documents') }}" class="dropdown-item">{{ __('navbar.documents') }}</a>
                 </div>
             </div>
 

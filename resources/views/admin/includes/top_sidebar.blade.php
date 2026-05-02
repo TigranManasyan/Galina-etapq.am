@@ -54,11 +54,6 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.document.index') }}" class="nav-link"><i class="fa-solid fa-file"></i>Փաստաթղթեր</a>
                     </li>
-
-
-
-
-
 {{--                    <li class="nav-item nav-item-submenu @if(Route::is('admin.groups.create')) nav-item-open @endif">--}}
 {{--                        <a href="#" class="nav-link"><i class="icon-users4"></i> <span>Խմբեր </span></a>--}}
 
