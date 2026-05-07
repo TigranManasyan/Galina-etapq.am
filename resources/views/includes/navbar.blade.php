@@ -53,7 +53,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('navbar.media') }}</a>
                 <div class="dropdown-menu fade-down m-0">
                     <a href="{{ route('news') }}" class="dropdown-item">{{ __('navbar.news') }}</a>
-                    <a href="{{ route('') }}" class="dropdown-item">{{ __('navbar.video') }}</a>
+                    <a href="{{ route('videos') }}" class="dropdown-item">{{ __('navbar.video') }}</a>
                     <a href="{{ route('gallery') }}" class="dropdown-item">{{ __('navbar.gallery') }}</a>
                 </div>
             </div>
