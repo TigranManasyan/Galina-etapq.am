@@ -17,6 +17,8 @@ return [
     'gallery' => 'Պատկերասրահ',
     'contact' => 'Կապ',
     'announcements' => 'Հայտարարություններ',
-    'media' => 'Մեդիա'
+    'media' => 'Մեդիա',
+    'electronic_library' => 'Էլեկտրոնային գրադարան',
+
 
 ];

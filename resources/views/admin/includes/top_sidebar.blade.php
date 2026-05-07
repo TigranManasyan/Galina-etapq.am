@@ -54,14 +54,47 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.document.index') }}" class="nav-link"><i class="fa-solid fa-file"></i>Փաստաթղթեր</a>
                     </li>
-{{--                    <li class="nav-item nav-item-submenu @if(Route::is('admin.groups.create')) nav-item-open @endif">--}}
-{{--                        <a href="#" class="nav-link"><i class="icon-users4"></i> <span>Խմբեր </span></a>--}}
+                    <li class="nav-item nav-item-submenu @if(Route::is('admin.groups.create')) nav-item-open @endif">
+                        <a href="#" class="nav-link"><i class="fa-solid fa-book"></i> <span>Էլ․ գրադարան </span></a>
 
-{{--                        <ul @if(Route::is('admin.groups.create') || Route::is('admin.groups.index')) style="display: block" @endif  class="nav nav-group-sub" data-submenu-title="Layouts">--}}
-{{--                            <li class="nav-item"><a href="" class="nav-link @if(Route::is('admin.groups.create')) active @endif">Ստեղծել</a></li>--}}
-{{--                            <li class="nav-item"><a href="" class="nav-link @if(Route::is('admin.groups.index')) active @endif">Ցանկ</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
+                        <ul @if(Route::is('admin.library.create') || Route::is('admin.library.index')) style="display: block" @endif  class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('admin.library.create') }}" class="nav-link @if(Route::is('admin.library.create')) active @endif">Ստեղծել</a></li>
+                            <li class="nav-item"><a href="{{ route('admin.library.index') }}" class="nav-link @if(Route::is('admin.library.index')) active @endif">Ցանկ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-item-submenu @if(Route::is('admin.article.create')) nav-item-open @endif">
+                        <a href="#" class="nav-link"><i class="fa-solid fa-newspaper"></i> <span>Նորություններ </span></a>
+
+                        <ul @if(Route::is('admin.article.create') || Route::is('admin.article.index')) style="display: block" @endif  class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('admin.article.create') }}" class="nav-link @if(Route::is('admin.article.create')) active @endif">Ստեղծել</a></li>
+                            <li class="nav-item"><a href="{{ route('admin.article.index') }}" class="nav-link @if(Route::is('admin.article.index')) active @endif">Ցանկ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-item-submenu @if(Route::is('admin.announcement.create')) nav-item-open @endif">
+                        <a href="#" class="nav-link"><i class="fa-solid fa-bullhorn"></i> <span>Հայտարարություններ </span></a>
+
+                        <ul @if(Route::is('admin.announcement.create') || Route::is('admin.announcement.index')) style="display: block" @endif  class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('admin.announcement.create') }}" class="nav-link @if(Route::is('admin.announcement.create')) active @endif">Ստեղծել</a></li>
+                            <li class="nav-item"><a href="{{ route('admin.announcement.index') }}" class="nav-link @if(Route::is('admin.announcement.index')) active @endif">Ցանկ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-item-submenu @if(Route::is('admin.video.create')) nav-item-open @endif">
+                        <a href="#" class="nav-link"><i class="fa-solid fa-video"></i> <span>Տեսահոլովակներ </span></a>
+
+                        <ul @if(Route::is('admin.video.create') || Route::is('admin.video.index')) style="display: block" @endif  class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('admin.video.create') }}" class="nav-link @if(Route::is('admin.video.create')) active @endif">Ստեղծել</a></li>
+                            <li class="nav-item"><a href="{{ route('admin.video.index') }}" class="nav-link @if(Route::is('admin.video.index')) active @endif">Ցանկ</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-item-submenu @if(Route::is('admin.gallery.create')) nav-item-open @endif">
+                        <a href="#" class="nav-link"><i class="fa-regular fa-image"></i> <span>Տեսադարան </span></a>
+
+                        <ul @if(Route::is('admin.gallery.create') || Route::is('admin.gallery.index')) style="display: block" @endif  class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('admin.gallery.create') }}" class="nav-link @if(Route::is('admin.gallery.create')) active @endif">Ստեղծել</a></li>
+                            <li class="nav-item"><a href="{{ route('admin.gallery.index') }}" class="nav-link @if(Route::is('admin.gallery.index')) active @endif">Ցանկ</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!-- /main navigation -->

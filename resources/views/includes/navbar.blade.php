@@ -36,28 +36,28 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('navbar.for_students') }}</a>
                 <div class="dropdown-menu fade-down m-0">
-                    <a href="" class="dropdown-item">{{ __('navbar.partners') }}</a>
-                    <a href="" class="dropdown-item">{{ __('navbar.olympiads') }}</a>
+                    <a href="{{ route('partners') }}" class="dropdown-item">{{ __('navbar.partners') }}</a>
+                    <a href="{{ route('olympiads') }}" class="dropdown-item">{{ __('navbar.olympiads') }}</a>
+                    <a href="{{ route('library') }}" class="dropdown-item">{{ __('navbar.electronic_library') }}</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('navbar.for_applicants') }}</a>
                 <div class="dropdown-menu fade-down m-0">
-                    <a href="" class="dropdown-item">{{ __('navbar.professions') }}</a>
-                    <a href="" class="dropdown-item">{{ __('navbar.procedure') }}</a>
-                    <a href="" class="dropdown-item">{{ __('navbar.necessary_documents') }}</a>
+                    <a href="{{ route('professions') }}" class="dropdown-item">{{ __('navbar.professions') }}</a>
+                    <a href="{{ route('procedure') }}" class="dropdown-item">{{ __('navbar.procedure') }}</a>
+                    <a href="{{ route('necessary_documents') }}" class="dropdown-item">{{ __('navbar.necessary_documents') }}</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ __('navbar.media') }}</a>
                 <div class="dropdown-menu fade-down m-0">
-                    <a href="" class="dropdown-item">{{ __('navbar.news') }}</a>
-                    <a href="" class="dropdown-item">{{ __('navbar.video') }}</a>
-                    <a href="" class="dropdown-item">{{ __('navbar.gallery') }}</a>
+                    <a href="{{ route('news') }}" class="dropdown-item">{{ __('navbar.news') }}</a>
+                    <a href="{{ route('') }}" class="dropdown-item">{{ __('navbar.video') }}</a>
+                    <a href="{{ route('gallery') }}" class="dropdown-item">{{ __('navbar.gallery') }}</a>
                 </div>
             </div>
             <a href="" class="nav-item nav-link">{{ __('navbar.contact') }}</a>
-
         </div>
 
     </div>

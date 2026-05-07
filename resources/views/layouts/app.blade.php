@@ -29,6 +29,11 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset('asset/css/style.css')}}" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 </head>
 
 <body>
@@ -129,5 +134,7 @@
 
 <!-- Template Javascript -->
 <script src="{{ asset('asset/js/main.js') }}"></script>
+
+@stack('scripts')
 </body>
 </html>

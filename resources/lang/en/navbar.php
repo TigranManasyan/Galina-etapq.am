@@ -18,6 +18,7 @@ return [
     'contact' => 'Contact',
     'announcements' => 'Announcements',
     'media' => 'Media',
+    'electronic_library' => 'Electronic Library',
 
 
 ];
