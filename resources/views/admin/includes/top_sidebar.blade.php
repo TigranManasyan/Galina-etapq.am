@@ -95,6 +95,15 @@
                             <li class="nav-item"><a href="{{ route('admin.gallery.index') }}" class="nav-link @if(Route::is('admin.gallery.index')) active @endif">Ցանկ</a></li>
                         </ul>
                     </li>
+
+                    <li class="nav-item nav-item-submenu @if(Route::is('admin.olympiad.create')) nav-item-open @endif">
+                        <a href="#" class="nav-link"><i class="fa-regular fa-image"></i> <span>Օլիմպիադաներ </span></a>
+
+                        <ul @if(Route::is('admin.olympiad.create') || Route::is('admin.olympiad.index')) style="display: block" @endif  class="nav nav-group-sub" data-submenu-title="Layouts">
+                            <li class="nav-item"><a href="{{ route('admin.olympiad.create') }}" class="nav-link @if(Route::is('admin.olympiad.create')) active @endif">Ստեղծել</a></li>
+                            <li class="nav-item"><a href="{{ route('admin.olympiad.index') }}" class="nav-link @if(Route::is('admin.olympiad.index')) active @endif">Ցանկ</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <!-- /main navigation -->

@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Olympiad extends Model
 {
     use HasFactory;
+    protected $fillable = ['cover', 'title_hy', 'title_en', 'published'];
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\LibraryController;
+use App\Http\Controllers\Admin\OlympiadController;
 use App\Http\Controllers\Admin\VideoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
@@ -88,6 +89,17 @@ Route::prefix('admin')->group(function () {
             Route::get('/delete/{id}', [ImageController::class, 'delete'])->name('delete');
             Route::put('/update/{id}', [ImageController::class, 'update'])->name('update');
 
+        });
+
+
+        Route::prefix('olympiads')->name('admin.olympiad.')->group(function () {
+            Route::get('/', [OlympiadController::class, 'index'])->name('index');
+            Route::get('/create', [OlympiadController::class, 'create'])->name('create');
+            Route::get('/{id}/change/{status}', [OlympiadController::class, 'change_status'])->name('changes_status');
+            Route::get('/show/{id}', [OlympiadController::class, 'show'])->name('show');
+            Route::get('/delete/{id}', [OlympiadController::class, 'destroy'])->name('destroy');
+            Route::post('/store', [OlympiadController::class, 'store'])->name('store');
+            Route::post('/update/{id}', [OlympiadController::class, 'update'])->name('update');
         });
     });
 });

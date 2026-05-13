@@ -36,7 +36,6 @@ class ArticleController extends Controller
                 return redirect()->back()->with('fail', 'Ֆայլի վերբեռնումը ձախողվեց');
             }
         }
-
     }
 
     public function show($id) {

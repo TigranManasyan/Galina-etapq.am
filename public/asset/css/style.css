@@ -1,8 +1,72 @@
 /********** Template CSS **********/
 :root {
-    --primary: #06BBCC;
-    --light: #F0FBFC;
-    --dark: #181d38;
+    --primary: #022D57;
+    --light: #EE6F04;
+    --dark: #C70D22;
+}
+
+.images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 200px;
+    grid-gap: 5px;
+    grid-auto-flow: dense;
+}
+
+.images img {
+    width: 100%;
+    height: 100%;
+}
+
+.horizontal{
+    grid-column: span 2;
+}
+.vertical {
+    grid-row: span 2;
+    object-fit: contain;
+}
+.big{
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.partners-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.partner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.partner img {
+    max-width: 100%;
+    height: auto;
+}
+
+.partner-name {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#profession-table thead {
+    background-color: var(--light);
+}
+
+#profession-table thead th {
+    color:#ffffff;
+}
+.table-subtitle {
+    background-color: var(--primary);
+
+}
+
+.table-subtitle td {
+    color:#ffffff;
 }
 
 .fw-medium {
@@ -89,7 +153,7 @@
 .navbar-light .navbar-nav .nav-link {
     margin-right: 30px;
     padding: 25px 0;
-    color: #FFFFFF;
+    color: #022D57;
     font-size: 15px;
     text-transform: uppercase;
     outline: none;
@@ -98,6 +162,19 @@
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link.active {
     color: var(--primary);
+}
+
+.lang-link {
+    color: #0324a8;
+    opacity: .8;
+    margin-right:10px;
+}
+
+.active-lang-link {
+    color:#ff0000;
+    opacity: 1;
+    font-weight: bold;
+
 }
 
 @media (max-width: 991.98px) {
@@ -157,7 +234,7 @@
         position: relative;
         min-height: 500px;
     }
-    
+
     .header-carousel .owl-carousel-item img {
         position: absolute;
         width: 100%;
