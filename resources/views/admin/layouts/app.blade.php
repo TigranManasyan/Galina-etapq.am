@@ -45,7 +45,12 @@
 
         <!-- Content area -->
         <div class="content">
-
+            <div class="row mb-2">
+                <div class="col-md-12 d-flex justify-content-end">
+                    <a href="{{ route('admin.logout') }}" class="btn btn-primary btn-sm">Դուրս գալ</a>
+                    <a href="{{ route('reset.view') }}" class="btn ml-2 btn-secondary btn-sm">Փոխել ծածկագիրը</a>
+                </div>
+            </div>
             @yield('content')
         </div>
     </div>
@@ -59,17 +64,6 @@
         </button>
     </div>
 
-    <div class="navbar-collapse collapse" id="navbar-footer">
-			<span class="navbar-text">
-				&copy; 2015 - 2018. <a href="#">Limitless Web App Kit</a> by <a href="http://themeforest.net/user/Kopyov" target="_blank">Eugene Kopyov</a>
-			</span>
-
-        <ul class="navbar-nav ml-lg-auto">
-            <li class="nav-item"><a href="https://kopyov.ticksy.com/" class="navbar-nav-link" target="_blank"><i class="icon-lifebuoy mr-2"></i> Support</a></li>
-            <li class="nav-item"><a href="http://demo.interface.club/limitless/docs/" class="navbar-nav-link" target="_blank"><i class="icon-file-text2 mr-2"></i> Docs</a></li>
-            <li class="nav-item"><a href="https://themeforest.net/item/limitless-responsive-web-application-kit/13080328?ref=kopyov" class="navbar-nav-link font-weight-semibold"><span class="text-pink-400"><i class="icon-cart2 mr-2"></i> Purchase</span></a></li>
-        </ul>
-    </div>
 </footer>
 <!-- /footer -->
 @stack('scripts')

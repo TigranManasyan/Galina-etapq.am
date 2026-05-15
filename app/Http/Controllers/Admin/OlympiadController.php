@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OlympiadRequest;
 use App\Models\Olympiad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -16,7 +17,7 @@ class OlympiadController extends Controller
     public function create() {
         return view('admin.olympiad.create');
     }
-    public function store(Request $request) {
+    public function store(OlympiadRequest $request) {
         $data = $request->except('_token');
         if($request->hasFile('cover')) {
             $file = $request->file('cover');
@@ -49,6 +50,7 @@ class OlympiadController extends Controller
     }
 
     public function update(Request $request, $id) {
+        $data = $request->except('_token');
         $olympiad = Olympiad::findOrFail($id);
 
 

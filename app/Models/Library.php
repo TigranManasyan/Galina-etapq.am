@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Library extends Model
 {
     use HasFactory;
-    protected $fillable = ['department', 'name', 'author', 'year', 'path'];
+    protected $fillable = ['department_hy'. 'department_en', 'name', 'author', 'year', 'path'];
 }

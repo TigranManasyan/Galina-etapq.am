@@ -48,21 +48,36 @@
                     <div class="card-body">
                         <div class="text-center mb-3">
                             <h6 class="mb-0">etapq.am</h6>
-                            <h5 class="mb-0">Մուտք գործեք համակարգ</h5>
+                            <h5 class="mb-0">Մուտք</h5>
+                            @if(session('fail'))
+                                <div class="text-danger">
+                                    {{ session('fail') }}
+                                </div>
+                            @endif
                         </div>
 
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input type="text" class="form-control" placeholder="Username" name='email'>
+                            <input type="text" class="form-control @if($errors->has('email')) is-invalid @endif" placeholder="example@gmail.com" name='email'>
                             <div class="form-control-feedback">
                                 <i class="icon-user text-muted"></i>
+
+
                             </div>
+
+                            @if($errors->has('email'))
+                                <p class="text-danger">{{ $errors->first('email') }}</p>
+                            @endif
                         </div>
 
                         <div class="form-group form-group-feedback form-group-feedback-left">
-                            <input type="password" class="form-control" placeholder="Password" name='password'>
+                            <input type="password" class="form-control @if($errors->has('password')) is-invalid @endif" placeholder="12345678" name='password'>
                             <div class="form-control-feedback">
                                 <i class="icon-lock2 text-muted"></i>
+
                             </div>
+                            @if($errors->has('password'))
+                                <p class="text-danger">{{ $errors->first('password') }}</p>
+                            @endif
                         </div>
 
                         <div class="form-group d-flex align-items-center">
@@ -79,9 +94,6 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Մուտք <i class="icon-circle-right2 ml-2"></i></button>
                         </div>
-
-
-
                     </div>
                 </div>
             </form>

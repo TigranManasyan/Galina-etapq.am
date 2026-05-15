@@ -27,4 +27,15 @@ class DocumentRequest extends FormRequest
             'doc' => 'required|mimetypes:application/pdf',
         ];
     }
+
+    public function messages(): array {
+        return [
+            'name_hy.required' => 'Անվանումը հայերենով պարտադիր է',
+            'name_hy.string' => 'Այս դաշտում կարող եք մուտքագրել միայն տեքստ',
+            'name_en.required' => 'Անվանումը անգլերենով պարտադիր է',
+            'name_en.string' => 'Այս դաշտում կարող եք մուտքագրել միայն տեքստ',
+            'doc.required' => 'Ֆայլը պարտադիր պետք է լրացնել',
+            'doc.mimetypes' => 'Ֆայլի ֆորմատը պետք է լինի pdf.'
+        ];
+    }
 }

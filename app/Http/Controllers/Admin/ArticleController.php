@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class ArticleController extends Controller
         return view('admin.article.create');
     }
 
-    public function store(Request $request) {
+    public function store(ArticleRequest $request) {
         $data = $request->except('_token');
         $data['user_id'] = Auth::id();
         if($request->hasFile('cover_photo')) {

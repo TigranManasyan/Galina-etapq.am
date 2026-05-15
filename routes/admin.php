@@ -13,15 +13,15 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AnnouncementController;
 
 Route::prefix('admin')->group(function () {
-//    Route::get('/', function () {
-//        return "Admin panel";
-//    });
 
     Route::get('/login', [AuthController::class, 'login_view'])->name('admin.login');
     Route::post('/login', [AuthController::class, 'login'])->name('admin.login.post');
 
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+        Route::get('/reset', [AuthController::class, 'reset_view'])->name('reset.view');
+        Route::post('/reset', [AuthController::class, 'reset'])->name('reset.post');
 
         Route::prefix('documents')->name('admin.document.')->group(function () {
             Route::get('/', [DocumentController::class, 'index'])->name('index');

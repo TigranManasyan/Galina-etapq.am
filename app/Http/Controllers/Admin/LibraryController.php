@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LibraryRequest;
 use App\Models\Library;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -18,7 +19,7 @@ class LibraryController extends Controller
         return view('admin.library.create');
     }
 
-    public function store(Request $request) {
+    public function store(LibraryRequest $request) {
         $data = $request->except('_token');
         $file = $request->file('book');
         $name = time() . '.' . $file->getClientOriginalExtension();

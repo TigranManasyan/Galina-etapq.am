@@ -59,6 +59,7 @@
                 </div>
             </div>
 
+            <a href="{{ route('announcements') }}" class="nav-item nav-link">{{ __('navbar.announcements') }}</a>
             <a href="{{ route('contact') }}" class="nav-item nav-link">{{ __('navbar.contact') }}</a>
         </div>
     </div>

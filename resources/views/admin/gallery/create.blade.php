@@ -12,14 +12,14 @@
                     <form id="save-gallery" action="{{ route('admin.gallery.store') }}" method="post">
                         @csrf
                         <div class="form-group">
-                            <label for="title_hy" class="form-lable">Վենագիր /հայերեն/</label>
+                            <label for="title_hy" class="form-lable">Վենագիր (հայերեն)<sup style="color:red;font-weight: bold;">*</sup></label>
                             <input value="{{ old('title_hy') }}" placeholder="Վերնագիրը հայերեն" type="text" class="form-control @if($errors->has('title_hy')) is-invalid @endif" id="title_hy" name="title_hy">
                             @if($errors->has('title_hy'))
                                 <div class="invalid-feedback">{{ $errors->first('title_hy') }}</div>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="title_en" class="form-lable">Վենագիր /անգլերեն/</label>
+                            <label for="title_en" class="form-lable">Վենագիր (անգլերեն)<sup style="color:red;font-weight: bold;">*</sup></label>
                             <input value="{{ old('title_en') }}" placeholder="Վերնագիրը անգլերեն" type="text" class="form-control @if($errors->has('title_en')) is-invalid @endif" id="title_en" name="title_en">
                             @if($errors->has('title_en'))
                                 <div class="invalid-feedback">{{ $errors->first('title_en') }}</div>

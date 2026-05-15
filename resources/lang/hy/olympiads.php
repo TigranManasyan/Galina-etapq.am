@@ -1,5 +1,4 @@
 <?php
 return [
-    'plympiads-title' => 'Օլիմպիադաներ',
-    
+    'olympiads-title' => 'Օլիմպիադաներ',
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VideoRequest;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class VideoController extends Controller
         return view('admin.video.create');
     }
 
-    public function store(Request $request) {
+    public function store(VideoRequest $request) {
         $data = $request->except('_token');
         $data['user_id'] = Auth::id();
         if(Video::create($data)) {

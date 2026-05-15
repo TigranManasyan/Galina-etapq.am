@@ -9,7 +9,7 @@
 
                 <h6 class="section-title bg-white text-start text-primary pe-3">{{ __('documents.documents-title') }}</h6>
                 @foreach($documents as $document)
-                    <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>{{ $document->name_hy }}</p>
+                    <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i><a download href="{{ asset('uploads/' . $document->path) }}">{{ $document['name_' . app()->getLocale()] }}</a></p>
                 @endforeach
             </div>
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">

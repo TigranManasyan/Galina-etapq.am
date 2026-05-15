@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="media">
                         <div class="mr-3">
-                            <a href="#"><img src="{{ asset('assets/logo.png') }}" width="38" height="38" class="rounded-circle" alt=""></a>
+                            <a href="#"><img src="{{ asset('logo.png') }}" width="38" height="38" class="rounded-circle" alt=""></a>
                         </div>
 
                         <div class="media-body">
@@ -45,7 +45,7 @@
                 <ul class="nav nav-sidebar" data-nav-type="accordion">
                     <li class="nav-item-header mt-0"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
                     <li class="nav-item">
-                        <a href="/admin" class="nav-link">
+                        <a href="{{ route('admin.dashboard') }}" class="nav-link">
                             <i class="icon-home4"></i>
                             <span>Գլխավոր էջ</span>
                         </a>

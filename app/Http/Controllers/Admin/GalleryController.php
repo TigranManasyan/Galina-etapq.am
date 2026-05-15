@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GalleryRequest;
 use App\Models\Gallery;
 use App\Models\Image;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class GalleryController extends Controller
         return view('admin.gallery.create');
     }
 
-    public function store(Request $request) {
+    public function store(GalleryRequest $request) {
         $data = $request->except('_token');
         if(Gallery::create($data)) {
             return redirect()->route('admin.gallery.index')->with('success', 'Հայտարարությունը պահպանված է');

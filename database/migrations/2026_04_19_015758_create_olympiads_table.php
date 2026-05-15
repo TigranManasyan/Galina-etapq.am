@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('olympiads', function (Blueprint $table) {
             $table->id();
             $table->string('cover');
+            $table->string('url');
             $table->string('title_hy');
             $table->string('title_en');
             $table->boolean('published')->default(true);
